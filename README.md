@@ -72,9 +72,9 @@ Convex hull construction: O(N)
 Perimeter calculation: O(N)
 
 Overall complexity:
-👉 O(N log N)
+O(N log N)
 
-🧾 Input Format
+Input Format
 N
 x1 y1 x2 y2
 x1 y1 x2 y2
@@ -82,7 +82,7 @@ x1 y1 x2 y2
 
 Each line represents opposite corners of a rectangle.
 
-📤 Output Format
+Output Format
 
 Single floating-point number:
 
@@ -90,15 +90,19 @@ minimum perimeter of convex hull
 
 Printed with precision of 6 decimal places.
 
-🧑‍💻 Implementation Details
+Implementation Details
+
 Language: Java
 Data structure: ArrayList for dynamic point storage
 Geometry: Cross product + Euclidean distance
 Algorithm: Andrew’s Monotone Chain Convex Hull
-🚀 Summary
+
+
+Simple term: 
 
 The solution reduces a rectangle-based geometry problem into a classic convex hull problem and computes the minimum enclosing perimeter efficiently using computational geometry techniques.
 Output screenshots
+
 ![img.png](img.png)
 ![img_1.png](img_1.png)
 ![img_2.png](img_2.png)
