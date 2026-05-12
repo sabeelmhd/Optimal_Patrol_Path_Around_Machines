@@ -1,0 +1,113 @@
+1. Mathematical Explanation 
+(a)Each rectangle is completely defined by its four corners.
+The shortest enclosing boundary depends only on the outermost points.
+Therefore, we convert every rectangle into four corner points and solve the problem on points instead of rectangles.
+
+(b)The convex hull is the smallest convex polygon containing all rectangle corners.
+Any valid patrol path must enclose all rectangles.
+If the path bends inward, it becomes longer unnecessarily.
+Therefore, the shortest enclosing loop is the convex hull boundary.
+
+(c)Why sorting is needed
+Points are sorted in increasing order of x coordinate (and y coordinate if tied).
+Sorting helps us process the points from left to right systematically while constructing the convex hull boundary.
+Without sorting, the hull construction would not follow the correct geometric order.
+
+before sorting --> random takes
+after sorting --> left → right order
+
+
+We use Andrew’s Monotone Chain algorithm to compute the convex hull.
+
+First, all rectangle corner points are collected and sorted by x coordinate and then by y coordinate. Sorting is necessary because the hull must be constructed in geometric order from left to right.
+
+The algorithm processes points one by one while maintaining the current boundary of the hull.
+
+To determine whether a point should remain on the hull, we use the orientation (cross product) test for three points O, A, and B:
+
+(Ax - Ox)(By - Oy) -(Ay - Oy)(Bx - Ox)
+
+* Positive value → counterclockwise turn(left)
+* Negative value → clockwise turn(right)
+* Zero → collinear points(straight)
+
+If a clockwise turn occurs, the middle point cannot belong to the convex hull and is removed.
+
+The algorithm constructs:
+
+1. Lower hull
+2. Upper hull
+
+These are combined to form the final convex hull.
+
+Sorting requires O(N log N) time, and hull construction requires O(N) time.
+
+Therefore, the total time complexity is:
+
+O(N log N)
+
+
+
+2. Mathematical Details (Formulas)
+
+(1)To determine the orientation of three points O, A, and B, we use the cross product formula:
+
+(Ax - Ox)(By - Oy) -(Ay - Oy)(Bx - Ox)
+
+* Positive value indicates a counterclockwise (left) turn.
+* Negative value indicates a clockwise (right) turn.
+* Zero indicates that the points are collinear.
+
+This test is used while constructing the convex hull to remove points that create inward turns.
+
+(2)
+The Euclidean distance between two points (x1, y1) and (x2, y2) is:
+
+√((x2 − x1)² + (y2 − y1)²)
+
+This formula is used to compute the length of each edge of the convex hull.
+
+(3)
+The perimeter of the convex hull is computed as the sum of distances between consecutive hull points.
+
+If the hull points are:
+
+P0, P1, P2, ..., Pn−1
+
+then the perimeter is:
+
+Σ d(Pi, Pi+1)
+
+where the last point connects back to the first point.
+
+
+
+3. Code Solution
+
+The program first reads all rectangles and converts each rectangle into four corner points.
+
+All points are stored in a list and sorted lexicographically.
+
+The convex hull is computed using Andrew’s Monotone Chain algorithm. During hull construction, the orientation of three points is determined using the cross product formula:
+
+(Ax - Ox)(By - Oy) -(Ay - Oy)(Bx - Ox)
+
+The Euclidean distance between two points is computed using:
+
+√((x2 -x1)² + (y2 -y1)²)
+
+After obtaining the convex hull, the perimeter is calculated as the sum of distances between consecutive hull points.
+
+The implementation uses separate functions for:
+
+* Cross product
+* Distance calculation
+* Convex hull construction
+* Main procedure
+
+Sorting requires O(N log N) time, while hull construction requires O(N) time.
+
+Therefore, the total time complexity is O(N log N).
+
+
+
